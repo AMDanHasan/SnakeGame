@@ -22,23 +22,43 @@
       {x: 110, y: 150}
     ]
 
+    // Horizontal velocity
+    let dx = 10;
+    //  Vertical velocity
+    let dy = 0;
+
     // get the canvas element
     var gameCanvas = document.getElementById("gameCanvas");
-
     // Return a two demensional drawing context
     var ctx = gameCanvas.getContext("2d");
-
     // Select the color to fill the canvas
     ctx.fillStyle = CANVAS_BACKGROUND_COLOR;
     // Select the color for the border of the canvas
     ctx.strokestyle = CANVAS_BORDER_COLOR;
-
     // Draw a "filled" rectangle to cover the entire canvas
     ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
     // Draw a "border" around the entire canvas
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-    drawSnake();
+    function clearCanvas() {
+      // select the color to fill the drawing
+      ctx.fillStyle = CANVAS_BACKGROUND_COLOR;
+      // select the color for the border of the canvas
+      ctx.strokestyle = CANVAS_BORDER_COLOR;
+      // Draw a "filled" rectangle to cover the entire canvas
+      ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+      // Draw a "border" around the entire canvas
+      ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+    }
+
+    // Advances the snake by changing the x-coordinates of its parts
+    // according to horizontal velocity and the y-coordinates of its parts
+    // according to the vertical velocity
+    function advanceSnake() {
+      const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+      snake.unshift(head);
+      snake.pop();
+    }
 
     // Draws the snake on the canvas
 
