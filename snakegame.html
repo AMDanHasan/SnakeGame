@@ -62,6 +62,7 @@
     }
 
     main();
+    document.addEventListener("keydown", changeDirection)
 
     // Advances the snake by changing the x-coordinates of its parts
     // according to horizontal velocity and the y-coordinates of its parts
@@ -85,17 +86,48 @@
     function drawSnakePart(snakePart) {
       // Set the color of the snake part
       ctx.fillStyle = SNAKE_COLOR;
-
       // Set the border color of the snake part
       ctx.strokestyle = SNAKE_BORDER_COLOR;
-
       // draw a "filled" rectangle to represent the snake part at the coordinates
       // the part is located
       ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
-
       // draw a border around the snake part
       ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
     }
+
+    function changeDirection(event) {
+        const LEFT_KEY = 37;
+        const RIGHT_KEY = 39;
+        const UP_KEY = 38;
+        const DOWN_KEY = 40;
+
+        const keyPressed = event.keyCode;
+        const goingUp = dy === -10;
+        const goingDown = dy === 10;
+        const goingRight = dx === 10;
+        const goingLeft = dx === -10;
+
+        if (keyPressed === LEFT_KEY && !goingRight) {
+          dx = -10;
+          dy = 0;
+        }
+
+        if (keyPressed === UP_KEY && !goingDown) {
+          dx = 0;
+          dy = -10;
+        }
+
+        if (keyPressed === RIGHT_KEY && !goingLeft) {
+          dx = 10;
+          dy = 0;
+        }
+
+        if (keyPressed === DOWN_KEY && !goingDown) {
+          dx = 0;
+          dy = 10;
+        }
+     }
+
 
     </script>
   </body>
