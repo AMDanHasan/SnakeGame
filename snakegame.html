@@ -51,6 +51,18 @@
       ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
     }
 
+    function main() {
+      setTimeout (function onTick() {
+        clearCanvas();
+        advanceSnake();
+        drawSnake();
+        // call main again
+        main();
+      }, 100)
+    }
+
+    main();
+
     // Advances the snake by changing the x-coordinates of its parts
     // according to horizontal velocity and the y-coordinates of its parts
     // according to the vertical velocity
